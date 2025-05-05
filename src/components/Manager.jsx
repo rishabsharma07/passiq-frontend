@@ -14,7 +14,7 @@ const Manager = () => {
   const [passwordArray, setPasswordArray] = useState([]);
 
   const getPasswords = async () => {
-    let req = await fetch("http://localhost:3000/");
+    let req = await fetch("https://passiq.onrender.com/");
     let passwords = await req.json();
     setPasswordArray(passwords);
   };
@@ -54,7 +54,7 @@ const Manager = () => {
       form.username.length > 3 &&
       form.password.length > 3
     ) {
-      await fetch("http://localhost:3000/", {
+      await fetch("https://passiq.onrender.com/", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: form.id }),
@@ -62,7 +62,7 @@ const Manager = () => {
 
       const newEntry = { ...form, id: uuidv4() };
       setPasswordArray([...passwordArray, newEntry]);
-      await fetch("http://localhost:3000/", {
+      await fetch("https://passiq.onrender.com/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEntry),
@@ -88,7 +88,7 @@ const Manager = () => {
     let c = confirm("Do you really want to delete this password?");
     if (c) {
       setPasswordArray(passwordArray.filter((item) => item.id !== id));
-      await fetch("http://localhost:3000/", {
+      await fetch("https://passiq.onrender.com/", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
