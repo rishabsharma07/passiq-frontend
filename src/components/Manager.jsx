@@ -49,40 +49,51 @@ const Manager = () => {
   };
 
   const savePassword = async () => {
-    if (
-      form.site.length > 3 &&
-      form.username.length > 3 &&
-      form.password.length > 3
-    ) {
+  if (
+    form.site.length > 3 &&
+    form.username.length > 3 &&
+    form.password.length > 3
+  ) {
+    let newEntry;
+
+    if (form.id) {
+      // Editing existing password
       await fetch("https://passiq.onrender.com/", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: form.id }),
       });
-
-      const newEntry = { ...form, id: uuidv4() };
-      setPasswordArray([...passwordArray, newEntry]);
-      await fetch("https://passiq.onrender.com/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEntry),
-      });
-
-      setform({ site: "", username: "", password: "" });
-      toast("Password saved!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      newEntry = { ...form };
     } else {
-      toast("Error: Password not saved!");
+      // Creating new password
+      newEntry = { ...form, id: uuidv4() };
     }
-  };
+
+    setPasswordArray([...passwordArray, newEntry]);
+
+    await fetch("https://passiq.onrender.com/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEntry),
+    });
+
+    setform({ site: "", username: "", password: "" });
+
+    toast("Password saved!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  } else {
+    toast("Error: Password not saved!");
+  }
+};
+
 
   const deletePassword = async (id) => {
     let c = confirm("Do you really want to delete this password?");
