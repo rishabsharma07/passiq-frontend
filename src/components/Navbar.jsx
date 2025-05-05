@@ -6,7 +6,7 @@ const Navbar = () => {
       <div className="logo font-bold text-2xl flex items-center">
         <span className="text-white">&lt;</span>
         <span className="text-white">Pass</span>
-        <span className="text-white">IQ/&gt;</span>
+        <span className="text-white">IQ12234/&gt;</span>
       </div>
 
       <nav className="flex items-center">
