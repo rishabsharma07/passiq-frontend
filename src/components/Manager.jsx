@@ -190,7 +190,7 @@ const Manager = () => {
           </div>
           <button
             onClick={savePassword}
-            className="flex justify-center items-center gap-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full px-8 py-2 w-fit border border-indigo-800"
+            className="flex justify-center items-center gap-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full px-8 py-2 w-fit border border-indigo-800 cursor-pointer"
           >
             Save
           </button>
